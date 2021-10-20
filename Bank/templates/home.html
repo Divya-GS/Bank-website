@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <meta charset="utf-8">
+        
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@200&display=swap" rel="stylesheet">          
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <!-- css -->
+        <link rel="stylesheet" href="../static/css/bank.css">
+    </head>
+    <body>
+        <!-- Navigation bar style="display: flex;
+        justify-content:space-between;align-items: center;"-->
+        <div class="topnav container-fluid" id="myTopnav" > 
+            <div class="logo" style="float: left;"><i class="fas fa-university fa-3x"></i><p>Bank of India</p></div>
+            <div class="links" style="float: right;">                
+                <a href="{{ url_for('Home') }}">Home</a>
+                <a href="#AboutUs">About</a>
+                <a href="#ContactUs">Contact</a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars "></i>
+                </a>
+            </div>            
+        </div>
+        <br>
+        {% with messages=get_flashed_messages() %} 
+            {% if messages %} 
+                {% for message in messages %} 
+                
+                <div class="alert alert-success alert-dismissible" style="width: 300px;margin: auto;">                   
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>                    
+                    <strong> {{ message }} </strong> 
+                </div>
+                
+                {% endfor %} 
+            {% endif %} 
+            {% endwith %} 
+        <div id="demo" class="carousel slide" data-ride="carousel" style="margin-top: 50px;">
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+              <li data-target="#demo" data-slide-to="0" class="active"></li>
+              <li data-target="#demo" data-slide-to="1"></li>
+              <li data-target="#demo" data-slide-to="2"></li>
+            </ul>
+            
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <img src="../static/images/customer.jpg" alt="customer">
+                        </div>
+                        <div class="col-sm-6 desc">
+                            <h1>Customer Details</h1>
+                            <hr>
+                            <ul>
+                                <li><h3>View all Customers and their Details</h3></li>
+                                <li><h3>Transfer money from a customer to another customer</h3></li>                                
+                            </ul>     <br>                
+                            <button type="button" class="btn btn-dark btn-lg">
+                                <a href="{{url_for('ViewCustomer')}}" style="text-decoration: none;color: white;">Customers</a>
+                            </button>
+                        </div>
+                  </div>                                
+              </div>
+              <div class="carousel-item">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <img src="../static/images/transfer.jpg" alt="transfer">
+                        </div>
+                        <div class="col-sm-6 desc">
+                            <h1>Transfer Money</h1>
+                            <hr>
+                            <ul>
+                                <li><h3>Easy way to transfer money from one account to another</h3></li>
+                                <li><h3>Enter sender, receiver, amount to transfer money</h3></li>                                
+                            </ul>  <br>            
+                            <button type="button" class="btn btn-dark btn-lg">
+                                <a href="{{url_for('MakeTransaction')}}" style="text-decoration: none;color: white;">Transfer</a>
+                            </button>
+                        </div>
+                  </div> 
+              </div>
+              <div class="carousel-item">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <img src="../static/images/history.jpg" alt="history">
+                        </div>
+                        <div class="col-sm-6 desc">
+                            <h1>Transaction History</h1>
+                            <hr>
+                            <ul>
+                                <li><h3>View all the history of transactions</h3></li>
+                                <li><h3>Transaction history details like sender, receiver, amount, message etc.</h3></li>
+                            </ul>   <br>                    
+                            <button type="button" class="btn btn-dark btn-lg">
+                                <a href="{{url_for('ViewTransaction')}}" style="text-decoration: none;color: white;">History</a>
+                            </button>
+                        </div>
+                  </div> 
+              </div>
+            </div>
+            
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+        <br>
+        <div class="about" id="AboutUs">
+            <h1 style="text-align: center;color: whitesmoke;">About Us</h1>
+            <div class="cards">
+                <div class="card img-fluid" style="width:450px">
+                    <img class="card-img-top" src="./static/images/view_customer.jpg" alt="Card image" style="width:100%;height:300px;">
+                    <div class="card-img-overlay">
+                    <h4 class="card-title">CUSTOMER</h4>
+                    <p class="card-text">View all customers</p>
+                    </div>
+                </div>
+                <div class="card img-fluid" style="width:450px">
+                    <img class="card-img-top" src="./static/images/transfer_money.jpg" alt="Card image" style="width:100%;height:300px;">
+                    <div class="card-img-overlay">
+                    <h4 class="card-title">TRANSFER</h4>
+                    <p class="card-text">Easy way to transfer money from one account to another.</p>
+                    </div>
+                </div>
+                <div class="card img-fluid" style="width:450px">
+                    <img class="card-img-top" src="./static/images/view_history.jpg" alt="Card image" style="width:100%;height:300px;">
+                    <div class="card-img-overlay">
+                    <h4 class="card-title">TRANSACTION</h4>
+                    <p class="card-text">Easy way to see all history transactions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div id="ContactUs" class="contact" style="padding: 30px;text-align: center;">
+            <h1 style="text-align: center;color: whitesmoke;">Contact Us</h1><br><br>
+            
+            <form action="{{ url_for('Contact') }}" method="post">
+                <div class="row topic" >
+                    <div class="col-sm-6" style="text-align: center;">
+                        <div class="row" >
+                            <div class="col-sm-6" ><h3 style="text-align: right;">Name</h3></div>
+                            <div class="col-sm-6"><h3><input type="text" name="name" ></h3></div>
+                        </div>
+                        <br><br>
+                        <div class="row">
+                            <div class="col-sm-6" ><h3 style="text-align: right;">Email</h3></div>
+                            <div class="col-sm-6"><h3><input type="text" name="email" ></h3></div>
+                        </div>
+                        <br><br>
+                        <div class="row">
+                            <div class="col-sm-6" ><h3 style="text-align: right;">Subject</h3></div>
+                            <div class="col-sm-6"><h3><input type="text" name="subject" ></h3></div>
+                        </div>
+                        <br><br>
+                    </div>
+                    <div class="col-sm-4" >
+                        <div class="row" >
+                            <div class="col-sm-6" ><h3 style="text-align: right;">Message</h3></div>
+                            <div class="col-sm-6"><h3 style="text-align: left;"><textarea name="body"  cols="25" rows="4" ></textarea></h3></div>
+                        </div>                       
+                    </div>
+                </div>
+                <br><br>
+                <button type="submit" class="btn btn-dark btn-lg">Send</button>
+            </form>
+        </div>
+        <footer>
+            <div class="footer">
+                <div class="row">
+                    <div class="col-sm-4" style="text-align: center;">
+                        <h3>SERVICES</h3>
+                        <h4><a href="{{ url_for('Home') }}">Home</a></h4>
+                        <h4><a href="#AboutUs">About</a></h4>
+                        <h4><a href="#ContactUs">Contact</a></h4>
+                    </div>
+                    <div class="col-sm-4" style="text-align: center;">
+                        <h3>CONTACT</h3>
+                        <h4>bankofindia@gmail.com</h4>
+                        <h4>+91 9078563423</h4>
+                        <h4>0422 2609854</h4>
+                    </div>
+                    <div class="col-sm-4" style="text-align: center;">
+                        <h3>SOCIAL</h3>
+                        <h4><i class="fab fa-facebook fa-2x"></i>&emsp;
+                        <i class="fab fa-twitter fa-2x"></i>&emsp;
+                        <i class="fab fa-instagram fa-2x"></i></h4>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script>
+        function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+        }
+        </script>
+    </body>
+</html>

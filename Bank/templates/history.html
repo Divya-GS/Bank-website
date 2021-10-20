@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <meta charset="utf-8">
+        
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!-- Google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@200&display=swap" rel="stylesheet">          
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <!-- css -->
+        <link rel="stylesheet" href="../static/css/bank.css">
+    </head>
+    <body>
+        <!-- Navigation bar style="display: flex;
+        justify-content:space-between;align-items: center;"-->
+        <div class="topnav container-fluid" id="myTopnav" > 
+            <div class="logo" style="float: left;"><i class="fas fa-university fa-3x"></i><p>Bank of India</p></div>
+            <div class="links" style="float: right;">                
+                <a href="{{ url_for('Home') }}">Home</a>
+                <a href="{{ url_for('Home') }}#AboutUs">About</a>
+                <a href="{{ url_for('Home') }}#ContactUs">Contact</a>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars "></i>
+                </a>
+            </div>            
+        </div>
+        <br>
+        
+        <h1 style="text-align: center;">TRANSACTION HISTORY</h1>
+        
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th>SNO</th>
+                    <th>SENDER ACC</th>
+                    <th>SENDER NAME</th>
+                    <th>RECEIVER ACC</th>
+                    <th>RECEIVER NAME</th>
+                    <th>AMOUNT</th>
+                    <th>MESSAGE</th>
+                    </tr>
+                </thead>
+                <tbody>              
+
+                    {% set count = namespace(value=1) %}
+                    {% if out %}
+                    {% for data in out %}
+                    
+                    <tr>
+                        <td>{{ count.value }}</td>
+                        {% set count.value = count.value + 1 %}
+                        <td>{{ data.SenderAcc }}</td>
+                        <td>{{ data.SenderName }}</td>
+                        <td>{{ data.ReceiverAcc }}</td>
+                        <td>{{ data.ReceiverName }}</td>
+                        <td>{{ data.Amount }}</td>
+                        <td>{{ data.Message }}</td>
+                    </tr>
+                    
+                    {% endfor %}
+                    {% endif %}
+
+                </tbody>
+            </table>
+        </div>
+
+
+        <footer>
+            <div class="footer">
+                <div class="row">
+                    <div class="col-sm-4" style="text-align: center;">
+                        <h3>SERVICES</h3>
+                        <h4><a href="{{ url_for('Home') }}">Home</a></h4>
+                        <h4><a href="{{ url_for('Home') }}#AboutUs">About</a></h4>
+                        <h4><a href="{{ url_for('Home') }}#ContactUs">Contact</a></h4>
+                    </div>
+                    <div class="col-sm-4" style="text-align: center;">
+                        <h3>CONTACT</h3>
+                        <h4>bankofindia@gmail.com</h4>
+                        <h4>+91 9078563423</h4>
+                        <h4>0422 2609854</h4>
+                    </div>
+                    <div class="col-sm-4" style="text-align: center;">
+                        <h3>SOCIAL</h3>
+                        <h4><i class="fab fa-facebook fa-2x"></i>&emsp;
+                        <i class="fab fa-twitter fa-2x"></i>&emsp;
+                        <i class="fab fa-instagram fa-2x"></i></h4>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script>
+        function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+        }
+        </script>
+    </body>
+</html>
